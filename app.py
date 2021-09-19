@@ -31,6 +31,18 @@ def create_app(test_config=None):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     return response
 
+  @app.route('/', methods=['GET'])
+  def index():
+    return jsonify({
+      'success': True,
+      'available_links': {
+          'all_categories': '/categories',
+          'all_questions': '/questions',
+          'category_questions': '/categories/<category_id>/questions'
+      },
+      'play_game_at': 'trivi-a-quiz.herokuapp.com'
+    })
+
   # RETURNS ALL AVAILABLE CATEGORIES
 
   @app.route('/categories', methods=['GET'])
